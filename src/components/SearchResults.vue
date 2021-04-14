@@ -20,7 +20,7 @@ export default {
     methods: {
         handleSelect(results) {
             this.selected = results
-            console.log(this.selected)
+            this.$emit('close-search-dropdown', this.selected)
         }
     }
 }

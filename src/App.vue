@@ -4,7 +4,11 @@
 </template>
 
 <script>
+import store from './store'
 import Nav from './components/Nav'
+
+console.log(store.state)
+
 export default {
   name: 'App',
   components: {
