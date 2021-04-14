@@ -1,24 +1,2 @@
-# stock-watcher
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+This project will be a stock market watching application. I plan on using vuex to manage state and the vue router.
+Still working through all the features I want to add, I would also like to expand the app at some point and create a backend where users can log in and get a customized view of the stocks they are watching.
