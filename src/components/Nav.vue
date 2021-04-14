@@ -1,19 +1,19 @@
 <template>
     <div id="nav">
-        <router-link to="/">Home</router-link> 
+        <router-link to="/">Home</router-link>
         <router-link to="/about">About</router-link>
         <SearchBar />
-  </div>
+    </div>
 </template>
 
 <script>
-import SearchBar from './SearchBar'
+import SearchBar from './SearchBar';
 export default {
     name: 'Nav',
     components: {
-        SearchBar
-    }
-}
+        SearchBar,
+    },
+};
 </script>
 
 <style scoped>
@@ -21,5 +21,6 @@ export default {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    padding: 5px;
 }
 </style>

@@ -8,4 +8,10 @@ const callGetSymbol = async (search) => {
     );
 };
 
-export { callGetSymbol };
+const callGetStock = async (search) => {
+    return await axios.get(
+        `${baseURL}/query?function=TIME_SERIES_INTRADAY&symbol=${search}&interval=5min&apikey=${apiKey}`
+    );
+};
+
+export { callGetSymbol, callGetStock };

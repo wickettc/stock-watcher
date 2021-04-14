@@ -1,9 +1,15 @@
 <template>
     <div class="dropdown">
-            <ul>
-                <li @click="handleSelect(res)" v-for="res in resultsData.data.bestMatches" :key="res['1. symbol']">{{res['1. symbol']}} -- {{res['2. name']}}</li>
-            </ul>
-        </div>
+        <ul>
+            <li
+                @click="handleSelect(res)"
+                v-for="res in resultsData.data.bestMatches"
+                :key="res['1. symbol']"
+            >
+                {{ res['1. symbol'] }} -- {{ res['2. name'] }}
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>
@@ -14,16 +20,16 @@ export default {
     },
     data() {
         return {
-            selected: {}
-        }
+            selected: {},
+        };
     },
     methods: {
         handleSelect(results) {
-            this.selected = results
-            this.$emit('close-search-dropdown', this.selected)
-        }
-    }
-}
+            this.selected = results;
+            this.$emit('close-search-dropdown', this.selected);
+        },
+    },
+};
 </script>
 
 <style scoped>
@@ -44,6 +50,7 @@ li {
     border-bottom: none;
     padding: 5px 8px;
     cursor: pointer;
+    background: lightgray;
 }
 li:last-child {
     border-bottom: 1px solid black;
