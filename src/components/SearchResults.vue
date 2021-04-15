@@ -3,7 +3,7 @@
         <ul>
             <li
                 @click="handleSelect(res)"
-                v-for="res in resultsData.data.data"
+                v-for="res in usaResults"
                 :key="res.symbol"
             >
                 {{ res.instrument_name }} -- {{ res.symbol }}
@@ -29,6 +29,11 @@ export default {
             this.$emit('close-search-dropdown', this.selected);
         },
     },
+    computed: {
+        usaResults() {
+            return this.resultsData.data.data.filter(res => res.exchange_timezone === 'America/New_York')
+        }
+    }
 };
 </script>
 
