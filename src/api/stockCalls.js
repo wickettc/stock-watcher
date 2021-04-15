@@ -8,7 +8,7 @@ const callGetSymbol = async (search) => {
 
 const callGetStockTimeSeries = async (search) => {
     return await axios.get(
-        `${baseURL}/time_series?symbol=${search}&interval=15min&apikey=${apiKey}`
+        `${baseURL}/time_series?symbol=${search}&interval=1day&apikey=${apiKey}`
     );
 };
 
