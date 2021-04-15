@@ -1,19 +1,18 @@
 <template>
     <div class="stock">
-        <h2>{{ stockPage.instrument_name }}</h2>
+        <h2>{{ stockQuote.name }}</h2>
+        <h4>{{stockQuote.exchange}}</h4>
         <StockTimeLineChart 
             :timeLineSeries="timeLineSeries"
             :timeLineChartOptions="timeLineChartOptions"
         />
-        {{stockPage}}
     </div>
 </template>
 
 <script>
-import _ from 'lodash'
 import StockTimeLineChart from '../components/StockTimeLineChart'
 import store from '../store';
-import { callGetStockTimeSeries, callGetSymbol } from '../api/stockCalls';
+import { callGetStockTimeSeries, callGetStockQuote } from '../api/stockCalls';
 
 export default {
     name: 'Stock Page',
@@ -24,6 +23,7 @@ export default {
         return {
             timeSeries: [],
             displayChart: false,
+            stockQuote: {}
         };
     },
     computed: {
@@ -126,10 +126,8 @@ export default {
     },
     async created() {
         let res = await callGetStockTimeSeries(this.$route.params.symbol);
-        if (_.isEmpty(this.stockPage)) {
-            let res = await callGetSymbol(this.$route.params.symbol)
-            store.commit('updateStockPage', res.data.data[0]);
-        }
+        let quoteRes = await callGetStockQuote(this.$route.params.symbol)
+        this.stockQuote = quoteRes.data
         let vals = res.data.values;
         // reverse to show in chronological order
         this.timeSeries = vals.reverse()
@@ -138,6 +136,8 @@ export default {
     watch: {
         stockPage: async function() {
             let res = await callGetStockTimeSeries(this.stockPage.symbol);
+            let quoteRes = await callGetStockQuote(this.$route.params.symbol)
+            this.stockQuote = quoteRes.data
             let vals = res.data.values;
             // reverse to show in chronological order
             this.timeSeries = vals.reverse()

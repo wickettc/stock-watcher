@@ -12,4 +12,10 @@ const callGetStockTimeSeries = async (search) => {
     );
 };
 
-export { callGetSymbol, callGetStockTimeSeries };
+const callGetStockQuote = async (search) => {
+    return await axios.get(
+        `${baseURL}/quote?symbol=${search}&apikey=${apiKey}`
+    );
+};
+
+export { callGetSymbol, callGetStockTimeSeries, callGetStockQuote };
