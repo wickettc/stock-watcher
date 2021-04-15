@@ -19,7 +19,7 @@ const routes = [
     {
         path: '/stock/:symbol',
         name: 'Stock Page',
-        component: () => import('../views/Stock.vue'),
+        component: () => import('../views/StockPage.vue'),
         // props: true,
     },
 ];

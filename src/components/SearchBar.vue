@@ -16,7 +16,7 @@
 import store from '../store';
 import SearchResults from './SearchResults';
 import _ from 'lodash';
-import { callGetSymbol } from '../api/alphaVantageCalls';
+import { callGetSymbol } from '../api/stockCalls';
 export default {
     name: 'SearchBar',
     components: {
@@ -34,18 +34,20 @@ export default {
     },
     methods: {
         async getSymbol() {
-            let res = await callGetSymbol(this.searchTerm);
-            this.searchResultsData = res;
-            this.showSearchResults = true;
+            if (this.searchTerm.length > 0) {
+                let res = await callGetSymbol(this.searchTerm);
+                console.log(res);
+                this.searchResultsData = res;
+                this.showSearchResults = true;
+            }
         },
         handleSelected(selected) {
             this.showSearchResults = false;
             this.searchTerm = '';
             store.commit('updateStockPage', selected);
-            console.log(store.state.stockPage);
             this.$router.push({
                 name: 'Stock Page',
-                params: { symbol: selected['1. symbol'] },
+                params: { symbol: selected.symbol },
             });
         },
     },

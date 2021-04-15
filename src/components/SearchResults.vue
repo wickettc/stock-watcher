@@ -3,10 +3,10 @@
         <ul>
             <li
                 @click="handleSelect(res)"
-                v-for="res in resultsData.data.bestMatches"
-                :key="res['1. symbol']"
+                v-for="res in resultsData.data.data"
+                :key="res.symbol"
             >
-                {{ res['1. symbol'] }} -- {{ res['2. name'] }}
+                {{ res.instrument_name }} -- {{ res.symbol }}
             </li>
         </ul>
     </div>
