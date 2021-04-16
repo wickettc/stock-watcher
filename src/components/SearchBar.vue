@@ -63,4 +63,9 @@ export default {
 input {
     padding: 10px 10px;
 }
+
+.search-bar label {
+    display: flex;
+    align-items: center;
+}
 </style>

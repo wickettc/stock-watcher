@@ -22,5 +22,13 @@ export default {
     justify-content: space-evenly;
     align-items: center;
     padding: 5px;
+    background: rgb(35, 173, 35);
+    color: white;
+    font-size: 1.3rem;
+}
+
+#nav a {
+    color: white;
+    text-decoration: none;
 }
 </style>
