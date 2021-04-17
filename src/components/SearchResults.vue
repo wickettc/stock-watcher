@@ -3,8 +3,8 @@
         <ul>
             <li
                 @click="handleSelect(res)"
-                v-for="res in usaResults"
-                :key="res.symbol"
+                v-for="(res, i) in usaResults"
+                :key="Math.random() * i * 100000000"
             >
                 {{ res.instrument_name }} -- {{ res.symbol }}
             </li>
@@ -31,9 +31,11 @@ export default {
     },
     computed: {
         usaResults() {
-            return this.resultsData.data.data.filter(res => res.exchange_timezone === 'America/New_York')
-        }
-    }
+            return this.resultsData.data.data.filter(
+                (res) => res.exchange_timezone === 'America/New_York'
+            );
+        },
+    },
 };
 </script>
 

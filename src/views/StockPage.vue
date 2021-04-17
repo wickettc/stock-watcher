@@ -1,12 +1,10 @@
 <template>
-    <div class="stock">
+    <div class="stock-page">
         <StockInfo v-if="!loading" :stockQuote="stockQuote" />
         <StockTimeLineChart
             :timeLineSeries="timeLineSeries"
             :timeLineChartOptions="timeLineChartOptions"
         />
-
-        <!-- {{ fiftyTwoWeek.high }} -->
     </div>
 </template>
 
@@ -178,3 +176,5 @@ export default {
     },
 };
 </script>
+
+<style scoped></style>

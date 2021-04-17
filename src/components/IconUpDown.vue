@@ -1,6 +1,6 @@
 <template>
     <div>
-        <span> {{ percent }}% </span>
+        <span :class="redOrGreen"> {{ percent.toFixed(2) }}% </span>
         <svg
             v-if="isPositive"
             xmlns="http://www.w3.org/2000/svg"
@@ -39,8 +39,19 @@ export default {
         isPositive: function() {
             return this.percent >= 0;
         },
+        redOrGreen: function() {
+            return this.isPositive ? 'green' : 'red';
+        },
     },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+</style>

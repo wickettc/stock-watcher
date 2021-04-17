@@ -1,33 +1,34 @@
 <template>
-  <Nav />
-  <router-view/>
+    <Nav />
+    <router-view />
 </template>
 
 <script>
-import store from './store'
-import Nav from './components/Nav'
+import store from './store';
+import Nav from './components/Nav';
 
-console.log(store.state)
+console.log(store.state);
 
 export default {
-  name: 'App',
-  components: {
-    Nav
-  }
-}
+    name: 'App',
+    components: {
+        Nav,
+    },
+};
 </script>
 
 <style>
-html, body {
-  padding: 0;
-  margin: 0;
+html,
+body {
+    padding: 0;
+    margin: 0;
+    background: rgb(209, 202, 202);
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
 }
-
 </style>

@@ -18,6 +18,7 @@
                     <b>High:</b> ${{ parseFloat(stockQuote.high).toFixed(2) }}
                 </p>
                 <p><b>Low:</b> ${{ parseFloat(stockQuote.low).toFixed(2) }}</p>
+                <p><b>Volume:</b> {{ volume }}</p>
             </div>
         </div>
         <div>
@@ -50,7 +51,6 @@ export default {
     },
     data() {
         return {
-            // displayDate: '',
             stockGreenOrRed: '',
         };
     },
@@ -68,6 +68,22 @@ export default {
                 splitDate[1] - 1,
                 splitDate[2]
             ).toDateString();
+        },
+        volume: function() {
+            // adds commas into string
+            let str = this.stockQuote.volume;
+            let res = '';
+            let count = 0;
+            for (let i = str.toString().length - 1; i >= 0; i--) {
+                if (count === 2) {
+                    res = `,${str[i]}${res}`;
+                    count = 0;
+                } else {
+                    res = `${str[i]}${res}`;
+                    count++;
+                }
+            }
+            return res;
         },
     },
 };
