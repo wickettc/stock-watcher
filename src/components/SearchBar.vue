@@ -2,7 +2,7 @@
     <div class="search-bar">
         <label
             >Search for a stock:
-            <input v-model="searchTerm" />
+            <input placeholder="Ex. Tesla" v-model="searchTerm" />
         </label>
         <SearchResults
             @close-search-dropdown="handleSelected"
@@ -62,6 +62,8 @@ export default {
 <style scoped>
 input {
     padding: 10px 10px;
+    margin-left: 5px;
+    text-align: center;
 }
 
 .search-bar label {

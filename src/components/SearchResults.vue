@@ -8,6 +8,7 @@
             >
                 {{ res.instrument_name }} -- {{ res.symbol }}
             </li>
+            <li v-if="usaResults.length === 0">No Results Found</li>
         </ul>
     </div>
 </template>

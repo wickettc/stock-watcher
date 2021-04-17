@@ -6,7 +6,7 @@
     </div>
     <div class="body">
         <div>
-            <h3>Displaying for {{ displayDate }}</h3>
+            <h3 class="add-italics">Displaying for {{ displayDate }}</h3>
             <div class="display-today">
                 <p>
                     <b>Open:</b> ${{ parseFloat(stockQuote.open).toFixed(2) }}
@@ -22,7 +22,7 @@
             </div>
         </div>
         <div>
-            <h3>Last 52 Weeks</h3>
+            <h3 class="add-italics">Last 52 Weeks</h3>
             <div class="display-52">
                 <p>
                     <b>High:</b> ${{
@@ -96,13 +96,23 @@ export default {
     align-items: center;
 }
 
+.header h2 {
+    width: 40%;
+}
+
 .display-today {
     display: flex;
     justify-content: space-evenly;
+    background: #e7e7e7;
 }
 
 .display-52 {
     display: flex;
     justify-content: space-evenly;
+    background: #e7e7e7;
+}
+
+.add-italics {
+    font-style: italic;
 }
 </style>
