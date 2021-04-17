@@ -1,7 +1,9 @@
 <template>
     <div class="stock-page">
+        <div class="loader" v-if="loading"></div>
         <StockInfo v-if="!loading" :stockQuote="stockQuote" />
         <StockTimeLineChart
+            v-if="!loading"
             :timeLineSeries="timeLineSeries"
             :timeLineChartOptions="timeLineChartOptions"
         />
@@ -155,6 +157,7 @@ export default {
     },
     watch: {
         stockPage: async function() {
+            this.loading = true;
             let res = await callGetStockTimeSeries(this.stockPage.symbol);
             let quoteRes = await callGetStockQuote(this.$route.params.symbol);
             this.stockQuote = quoteRes.data;
@@ -163,18 +166,12 @@ export default {
             this.timeSeries = vals.reverse();
             this.loading = false;
         },
-        // stockQuote: function() {
-        //     this.stockGreenOrRed =
-        //         this.stockQuote.percent_change <= 0 ? 'red' : 'green';
-        //     let splitDate = this.stockQuote.datetime.split('-');
-        //     this.displayDate = new Date(
-        //         splitDate[0],
-        //         splitDate[1] - 1,
-        //         splitDate[2]
-        //     ).toDateString();
-        // },
     },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.loader {
+    margin: 10%;
+}
+</style>

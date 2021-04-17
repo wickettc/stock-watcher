@@ -64,6 +64,8 @@ input {
     padding: 10px 10px;
     margin-left: 5px;
     text-align: center;
+    background: #e7e7e7;
+    border: 1px solid gray;
 }
 
 .search-bar label {
