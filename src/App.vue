@@ -4,10 +4,7 @@
 </template>
 
 <script>
-import store from './store';
 import Nav from './components/Nav';
-
-console.log(store.state);
 
 export default {
     name: 'App',
@@ -58,7 +55,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {

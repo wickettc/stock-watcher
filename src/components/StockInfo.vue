@@ -75,7 +75,7 @@ export default {
             let res = '';
             let count = 0;
             for (let i = str.toString().length - 1; i >= 0; i--) {
-                if (count === 2) {
+                if (count === 2 && i !== 0) {
                     res = `,${str[i]}${res}`;
                     count = 0;
                 } else {
@@ -94,10 +94,16 @@ export default {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    margin: 1% 0;
 }
 
 .header h2 {
     width: 40%;
+    margin: 0;
+}
+
+.header h4 {
+    margin: 0;
 }
 
 .display-today {

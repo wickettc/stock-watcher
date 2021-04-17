@@ -57,5 +57,12 @@ export default {
 
 div {
     font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+}
+
+svg {
+    padding-left: 10px;
+    padding-bottom: 10px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <h1>Stock Watcher</h1>
-        <h4>Search For Stock By Character</h4>
+        <h4>Search For Stocks By Character</h4>
         <div class="alpha-container">
             <div
                 :class="[
@@ -22,6 +22,7 @@
                 v-for="(stock, i) in displayStockList"
                 :key="Math.random() * i * 1000000"
                 :stockInfo="stock"
+                @click="handleStockSelect(stock)"
             >
                 <span>{{ stock.name }}</span>
                 <span class="bold">{{ stock.symbol }}</span>
@@ -32,12 +33,20 @@
 
 <script>
 import _ from 'lodash';
+import store from '../store';
 import { getAllStocksAvailable } from '../api/stockCalls';
 export default {
     name: 'Home',
     methods: {
         selectLetter(alpha) {
             this.selectedLetter = alpha;
+        },
+        handleStockSelect(selected) {
+            store.commit('updateStockPage', selected);
+            this.$router.push({
+                name: 'Stock Page',
+                params: { symbol: selected.symbol },
+            });
         },
     },
     watch: {
@@ -115,6 +124,13 @@ export default {
     justify-content: space-evenly;
     align-items: center;
     background: #e7e7e7;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.home-stock-display:hover {
+    background: rgb(35, 173, 35);
+    transform: scale(1.05);
 }
 
 .alpha-container {
