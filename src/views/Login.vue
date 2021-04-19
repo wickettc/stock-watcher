@@ -148,23 +148,46 @@ export default {
     margin-left: 5px;
 }
 
+.hide-form {
+    display: none;
+}
+
 .form-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.selected-btn {
-    background: rgb(35, 173, 35);
-}
-
-.hide-form {
-    display: none;
-}
-
 form {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 50%;
+    border: 1px solid black;
+    padding: 30px 15px;
+    border-radius: 25%;
+}
+
+form label {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-bottom: 3px;
+}
+
+form input {
+    width: 60%;
+    flex: 1;
+    margin-left: 5px;
+    text-align: right;
+}
+
+form button {
+    width: 30%;
+}
+
+.selected-btn {
+    background: rgb(35, 173, 35);
 }
 </style>
