@@ -69,4 +69,10 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: gray;
 }
+
+@media only screen and (max-width: 767px) {
+    #app {
+        margin-top: 55px;
+    }
+}
 </style>

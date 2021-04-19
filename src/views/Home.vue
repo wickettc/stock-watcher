@@ -145,7 +145,6 @@ export default {
 
 .alpha-container {
     display: flex;
-    width: 100%;
     justify-content: center;
     flex-wrap: wrap;
 }
@@ -172,5 +171,26 @@ export default {
 
 .loader {
     margin: 10%;
+}
+
+@media only screen and (max-width: 900px) {
+    .home-stock-display {
+        width: 45%;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .alpha-container {
+        margin: 0 20%;
+    }
+}
+
+@media only screen and (max-width: 678px) {
+    .home-stock-display {
+        width: 100%;
+    }
+    .alpha-container {
+        margin: 0 10%;
+    }
 }
 </style>

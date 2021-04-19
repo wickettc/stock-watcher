@@ -44,6 +44,7 @@ export default {
         handleSelected(selected) {
             this.showSearchResults = false;
             this.searchTerm = '';
+            store.commit('closeNavBar');
             store.commit('updateStockPage', selected);
             this.$router.push({
                 name: 'Stock Page',

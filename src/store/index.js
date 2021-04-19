@@ -7,6 +7,7 @@ export default createStore({
         stockPage: {},
         allStocksAvailable: [],
         userProfile: {},
+        openNavBar: false,
     },
     mutations: {
         updateStockPage(state, newStock) {
@@ -17,6 +18,12 @@ export default createStore({
         },
         setUserProfile(state, val) {
             state.userProfile = val;
+        },
+        handleNavBar(state) {
+            state.openNavBar = !state.openNavBar;
+        },
+        closeNavBar(state) {
+            state.openNavBar = false;
         },
     },
     actions: {
