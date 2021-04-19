@@ -15,4 +15,5 @@ auth.onAuthStateChanged(() => {
             .use(VueApexCharts)
             .mount('#app');
     }
+    store.commit('setUserProfile', auth.currentUser);
 });

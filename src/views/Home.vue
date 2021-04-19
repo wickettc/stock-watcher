@@ -24,8 +24,8 @@
                 :stockInfo="stock"
                 @click="handleStockSelect(stock)"
             >
-                <span>{{ stock.name }}</span>
-                <span class="bold">{{ stock.symbol }}</span>
+                <span class="stock-name">{{ stock.name }}</span>
+                <span class="bold stock-symbol">{{ stock.symbol }}</span>
             </div>
         </div>
     </div>
@@ -98,7 +98,6 @@ export default {
     },
     async created() {
         let res = await getAllStocksAvailable('United States');
-        console.log(res.data);
         this.allStocks = res.data.data;
         this.selectedLetter = 'A';
     },
@@ -131,6 +130,17 @@ export default {
 .home-stock-display:hover {
     background: rgb(35, 173, 35);
     transform: scale(1.05);
+}
+
+.stock-name {
+    width: 70%;
+    box-sizing: border-box;
+    padding-right: 3px;
+}
+
+.stock-symbol {
+    width: 30%;
+    box-sizing: border-box;
 }
 
 .alpha-container {

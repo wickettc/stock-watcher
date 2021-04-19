@@ -37,9 +37,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.matched.some((x) => x.meta.requiresAuth)) {
-        // check if logged in here
-        console.log(auth);
+    if (to.matched.some((x) => x.meta.requiresAuth) && !auth.currentUser) {
         next({ path: '/login' });
     } else {
         next();

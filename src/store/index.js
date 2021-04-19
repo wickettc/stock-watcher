@@ -43,6 +43,12 @@ export default createStore({
             });
             dispatch('fetchUserProfile', user);
         },
+        async logout({ commit }) {
+            await fb.auth.signOut();
+
+            commit('setUserProfile', {});
+            router.push('/login');
+        },
     },
     modules: {},
 });
