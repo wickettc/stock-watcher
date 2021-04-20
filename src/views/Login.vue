@@ -22,30 +22,35 @@
         >
             <label for="email">Email: </label>
             <input type="email" v-model.trim="signupForm.email" name="email" />
+            <div class="error">{{ signupFormErrors.email }}</div>
             <label for="firstname">First Name: </label>
             <input
                 type="firstname"
                 v-model.trim="signupForm.firstname"
                 name="First Name"
             />
+            <div class="error">{{ signupFormErrors.firstname }}</div>
             <label for="lastname">Last Name: </label>
             <input
                 type="lastname"
                 v-model.trim="signupForm.lastname"
                 name="Last Name"
             />
+            <div class="error">{{ signupFormErrors.lastname }}</div>
             <label for="password">Password: </label>
             <input
                 type="password"
                 v-model.trim="signupForm.password"
                 name="Password"
             />
+            <div class="error">{{ signupFormErrors.password }}</div>
             <label for="confirmpassword">Confirm Password: </label>
             <input
                 type="password"
                 v-model.trim="signupForm.confirmpassword"
                 name="Confirm Password"
             />
+            <div class="error">{{ signupFormErrors.confirmpassword }}</div>
             <button v-if="!loading">Sign Up</button>
             <div class="loader" v-if="loading"></div>
         </form>
@@ -88,7 +93,6 @@ export default {
                 password: '',
                 confirmpassword: '',
             },
-            // loginError: this.$store.state.loginError,
             loginFormErrors: {
                 email: '',
                 password: '',
@@ -106,6 +110,9 @@ export default {
         loginError() {
             return this.$store.state.loginError;
         },
+        signupError() {
+            return this.$store.state.signupError;
+        },
     },
     watch: {
         loginError: function() {
@@ -117,6 +124,16 @@ export default {
             } else {
                 this.loginFormErrors.password =
                     'Something went wrong, please try again';
+            }
+        },
+        signupError: function() {
+            this.loading = false;
+            if (this.signupError.code === 'auth/email-already-in-use') {
+                this.signupFormErrors.confirmpassword =
+                    'User Already Exists, Please Log In';
+            } else {
+                this.signupFormErrors.confirmpassword =
+                    'Something went wrong, please try again later';
             }
         },
     },
@@ -135,14 +152,41 @@ export default {
             });
         },
         signup() {
-            this.loading = true;
-            this.$store.dispatch('signup', {
-                email: this.signupForm.email,
-                firstname: this.signupForm.firstname,
-                lastname: this.signupForm.lastname,
-                password: this.signupForm.password,
-                confirmpassword: this.signupForm.confirmpassword,
-            });
+            !this.signupForm.email
+                ? (this.signupFormErrors.email = 'Please Enter Your Email')
+                : (this.signupFormErrors.email = '');
+            !this.signupForm.firstname
+                ? (this.signupFormErrors.firstname =
+                      'Please Enter Your First Name')
+                : (this.signupFormErrors.firstname = '');
+            !this.signupForm.lastname
+                ? (this.signupFormErrors.lastname =
+                      'Please Enter Your Last Name')
+                : (this.signupFormErrors.lastname = '');
+            this.signupForm.password.length <= 6
+                ? (this.signupFormErrors.password =
+                      'Password Must be 6 Characters or Longer')
+                : (this.signupFormErrors.password = '');
+            this.signupForm.password !== this.signupForm.confirmpassword
+                ? (this.signupFormErrors.confirmpassword =
+                      'Passwords Must Match')
+                : (this.signupFormErrors.confirmpassword = '');
+            if (
+                !this.signupFormErrors.email &&
+                !this.signupFormErrors.firstname &&
+                !this.signupFormErrors.lastname &&
+                !this.signupFormErrors.password &&
+                !this.signupFormErrors.confirmpassword
+            ) {
+                this.loading = true;
+                this.$store.dispatch('signup', {
+                    email: this.signupForm.email,
+                    firstname: this.signupForm.firstname,
+                    lastname: this.signupForm.lastname,
+                    password: this.signupForm.password,
+                    confirmpassword: this.signupForm.confirmpassword,
+                });
+            }
         },
     },
 };

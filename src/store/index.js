@@ -8,6 +8,7 @@ export default createStore({
         allStocksAvailable: [],
         userProfile: {},
         loginError: {},
+        signupError: {},
         openNavBar: false,
     },
     mutations: {
@@ -22,6 +23,9 @@ export default createStore({
         },
         setLoginError(state, error) {
             state.loginError = error;
+        },
+        setSignupError(state, error) {
+            state.signupError = error;
         },
         handleNavBar(state) {
             state.openNavBar = !state.openNavBar;
@@ -39,7 +43,6 @@ export default createStore({
                 );
                 dispatch('fetchUserProfile', user);
             } catch (err) {
-                console.log(err);
                 commit('setLoginError', err);
             }
         },
@@ -48,16 +51,20 @@ export default createStore({
             commit('setUserProfile', userProfile.data());
             router.push('/');
         },
-        async signup({ dispatch }, form) {
-            const { user } = await fb.auth.createUserWithEmailAndPassword(
-                form.email,
-                form.password
-            );
-            await fb.usersCollection.doc(user.uid).set({
-                firstname: form.firstname,
-                lastname: form.lastname,
-            });
-            dispatch('fetchUserProfile', user);
+        async signup({ dispatch, commit }, form) {
+            try {
+                const { user } = await fb.auth.createUserWithEmailAndPassword(
+                    form.email,
+                    form.password
+                );
+                await fb.usersCollection.doc(user.uid).set({
+                    firstname: form.firstname,
+                    lastname: form.lastname,
+                });
+                dispatch('fetchUserProfile', user);
+            } catch (err) {
+                commit('setSignupError', err);
+            }
         },
         async logout({ commit }) {
             await fb.auth.signOut();
