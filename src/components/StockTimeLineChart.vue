@@ -29,4 +29,10 @@ div {
 .chart {
     width: 90%;
 }
+
+@media only screen and (min-width: 1000px) {
+    .chart {
+        width: 65%;
+    }
+}
 </style>

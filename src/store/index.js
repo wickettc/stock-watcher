@@ -7,6 +7,7 @@ export default createStore({
         stockPage: {},
         allStocksAvailable: [],
         userProfile: {},
+        usersStocks: [],
         loginError: {},
         signupError: {},
         openNavBar: false,
@@ -20,6 +21,13 @@ export default createStore({
         },
         setUserProfile(state, val) {
             state.userProfile = val;
+        },
+        syncUserStocks(state, stocks) {
+            // stocks needs to be array of stocks
+            state.usersStocks = stocks;
+        },
+        addStockToProfile(state, stock) {
+            state.usersStocks.push(stock);
         },
         setLoginError(state, error) {
             state.loginError = error;
@@ -46,10 +54,23 @@ export default createStore({
                 commit('setLoginError', err);
             }
         },
+        async addStock({ commit }, stock) {
+            let stockCol = await fb.usersCollection
+                .doc(fb.auth.currentUser.uid)
+                .collection('stockCollection')
+                .doc(stock);
+            stockCol.set({
+                stock: stock,
+            });
+            commit('addStockToProfile', stock);
+        },
         async fetchUserProfile({ commit }, user) {
             const userProfile = await fb.usersCollection.doc(user.uid).get();
             commit('setUserProfile', userProfile.data());
-            router.push('/');
+            // const usersStocks = await userProfile.collection('stockCollection').get().then((doc) => {
+            // ////////////////////////need to loop through stocks here to add to userStock state
+            // })
+            router.push('/profile');
         },
         async signup({ dispatch, commit }, form) {
             try {
@@ -57,10 +78,11 @@ export default createStore({
                     form.email,
                     form.password
                 );
-                await fb.usersCollection.doc(user.uid).set({
-                    firstname: form.firstname,
-                    lastname: form.lastname,
+                const userCol = await fb.usersCollection.doc(user.uid);
+                userCol.set({
+                    displayName: `${form.firstname} ${form.lastname}`,
                 });
+
                 dispatch('fetchUserProfile', user);
             } catch (err) {
                 commit('setSignupError', err);

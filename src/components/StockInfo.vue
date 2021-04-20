@@ -1,5 +1,18 @@
 <template>
     <div class="header">
+        <svg
+            @click="addStock"
+            v-if="isLoggedIn"
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="white"
+        >
+            <path
+                d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"
+            />
+        </svg>
         <h2>{{ stockQuote.name }}</h2>
         <IconUpDown :percent="parseFloat(stockQuote.percent_change)" />
         <h4>{{ stockQuote.exchange }}</h4>
@@ -40,7 +53,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import IconUpDown from './IconUpDown';
+import _ from 'lodash';
 export default {
     name: 'StockInfo',
     components: {
@@ -49,18 +64,17 @@ export default {
     props: {
         stockQuote: Object,
     },
-    data() {
-        return {
-            stockGreenOrRed: '',
-        };
-    },
-    watch: {
-        stockQuote: function() {
-            this.stockGreenOrRed =
-                this.stockQuote.percent_change <= 0 ? 'red' : 'green';
+    methods: {
+        addStock() {
+            this.$store.dispatch('addStock', this.stockQuote.symbol);
+            console.log(this.$store.state);
         },
     },
     computed: {
+        ...mapState(['userProfile']),
+        isLoggedIn: function() {
+            return !_.isEmpty(this.userProfile);
+        },
         displayDate: function() {
             let splitDate = this.stockQuote.datetime.split('-');
             return new Date(

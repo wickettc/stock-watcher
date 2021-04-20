@@ -26,8 +26,6 @@ export default {
             timeSeries: [],
             displayChart: false,
             stockQuote: {},
-            stockGreenOrRed: '',
-            displayDate: '',
             loading: true,
         };
     },
