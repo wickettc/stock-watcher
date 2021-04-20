@@ -2,6 +2,9 @@
     <div id="nav">
         <div :class="['nav-content', openNavBar ? 'open-nav-content' : '']">
             <SearchBar class="item-searchbar" />
+            <router-link @click="closeNav" class="item-stocklist" to="/"
+                >Stock List</router-link
+            >
             <router-link
                 @click="closeNav"
                 class="item-login"
@@ -15,9 +18,6 @@
                 v-if="showLoggedIn"
                 to="/profile"
                 >Profile</router-link
-            >
-            <router-link @click="closeNav" class="item-stocklist" to="/"
-                >Stock List</router-link
             >
             <div
                 class="log-out-btn item-logout"

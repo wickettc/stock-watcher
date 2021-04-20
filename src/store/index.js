@@ -7,6 +7,7 @@ export default createStore({
         stockPage: {},
         allStocksAvailable: [],
         userProfile: {},
+        loginError: {},
         openNavBar: false,
     },
     mutations: {
@@ -19,6 +20,9 @@ export default createStore({
         setUserProfile(state, val) {
             state.userProfile = val;
         },
+        setLoginError(state, error) {
+            state.loginError = error;
+        },
         handleNavBar(state) {
             state.openNavBar = !state.openNavBar;
         },
@@ -27,12 +31,17 @@ export default createStore({
         },
     },
     actions: {
-        async login({ dispatch }, form) {
-            const { user } = await fb.auth.signInWithEmailAndPassword(
-                form.email,
-                form.password
-            );
-            dispatch('fetchUserProfile', user);
+        async login({ dispatch, commit }, form) {
+            try {
+                const { user } = await fb.auth.signInWithEmailAndPassword(
+                    form.email,
+                    form.password
+                );
+                dispatch('fetchUserProfile', user);
+            } catch (err) {
+                console.log(err);
+                commit('setLoginError', err);
+            }
         },
         async fetchUserProfile({ commit }, user) {
             const userProfile = await fb.usersCollection.doc(user.uid).get();

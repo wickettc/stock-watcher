@@ -13,7 +13,6 @@
 <script>
 import StockInfo from '../components/StockInfo';
 import StockTimeLineChart from '../components/StockTimeLineChart';
-import store from '../store';
 import { callGetStockTimeSeries, callGetStockQuote } from '../api/stockCalls';
 
 export default {
@@ -34,7 +33,7 @@ export default {
     },
     computed: {
         stockPage() {
-            return store.state.stockPage;
+            return this.$store.state.stockPage;
         },
         fiftyTwoWeek() {
             return this.stockQuote.fifty_two_week;
