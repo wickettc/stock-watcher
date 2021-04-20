@@ -83,11 +83,23 @@ export default {
 
 #nav a {
     color: white;
+    font-weight: 700;
     text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+#nav a:hover {
+    color: rgb(32, 32, 32);
 }
 
 .log-out-btn {
     cursor: pointer;
+    font-weight: 700;
+    transition: all 0.2s ease-in-out;
+}
+
+.log-out-btn:hover {
+    color: rgb(32, 32, 32);
 }
 
 .nav-hamburger {
@@ -137,6 +149,12 @@ export default {
         position: fixed;
         top: 0;
         z-index: 100000;
+        font-size: 1.2rem;
+    }
+
+    #nav a,
+    .log-out-btn {
+        transition: none;
     }
 
     .nav-hamburger {

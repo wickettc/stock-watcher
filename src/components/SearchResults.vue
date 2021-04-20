@@ -42,15 +42,18 @@ export default {
 
 <style scoped>
 .dropdown {
-    position: relative;
+    display: block;
+    width: 60%;
+    top: 46px;
+    position: absolute;
     z-index: 1000;
 }
 
 ul {
     width: 100%;
     list-style: none;
-    position: absolute;
     margin: 0;
+    padding: 0;
 }
 
 li {
@@ -66,5 +69,13 @@ li:last-child {
 
 li:hover {
     background: gray;
+}
+
+@media only screen and (max-width: 767px) {
+    .dropdown {
+        top: 175px;
+        width: 100%;
+        left: 0;
+    }
 }
 </style>

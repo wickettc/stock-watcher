@@ -204,6 +204,11 @@ export default {
     padding: 8px 10px;
     border: 1px solid black;
     font-weight: 700;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-container button:hover {
+    transform: scale(1.1);
 }
 
 .btn-container button:last-of-type {

@@ -1,9 +1,7 @@
 <template>
     <div class="search-bar">
-        <label
-            >Search for a stock:
-            <input placeholder="Ex. Tesla" v-model="searchTerm" />
-        </label>
+        <label>Search for a stock: </label>
+        <input placeholder="Ex. Tesla" v-model="searchTerm" />
         <SearchResults
             @close-search-dropdown="handleSelected"
             v-if="showSearchResults"
@@ -61,6 +59,10 @@ export default {
 </script>
 
 <style scoped>
+.search-bar {
+    display: flex;
+}
+
 input {
     padding: 10px 10px;
     margin-left: 5px;
@@ -71,6 +73,13 @@ input {
 
 .search-bar label {
     display: flex;
+    font-style: italic;
     align-items: center;
+    font-weight: 700;
+}
+@media only screen and (max-width: 767px) {
+    .search-bar {
+        flex-direction: column;
+    }
 }
 </style>
