@@ -1,6 +1,12 @@
 <template>
     <div class="home">
-        <h1>Stock Watcher</h1>
+        <h1>The Stock Watcher</h1>
+        <h2>
+            Created By
+            <a href="https://www.chasewickett.com/" target="__blank"
+                >Chase Wickett</a
+            >
+        </h2>
         <h4>Search For Stocks By Character</h4>
         <div class="alpha-container">
             <div
@@ -106,6 +112,27 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+    margin-bottom: 15px;
+}
+h2 {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-top: 0;
+    background: #e7e7e7;
+}
+
+h2 a {
+    color: rgb(35, 173, 35);
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+h2 a:hover {
+    text-decoration: underline;
+    color: rgb(28, 133, 28);
+}
+
 .home-stock-container {
     display: flex;
     flex-direction: row;
@@ -126,6 +153,7 @@ export default {
     background: #e7e7e7;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    box-shadow: 5px 5px 10px rgba(92, 91, 91, 0.836);
 }
 
 .home-stock-display:hover {

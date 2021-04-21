@@ -3,13 +3,23 @@
         <h1>Welcome {{ userProfile.displayName }}</h1>
         <h4>Manage Your Liked Stocks from Here!</h4>
         <ul>
-            <li
-                @click="handleClick(stock)"
-                v-for="(stock, i) in usersStocks"
-                :key="i"
-            >
-                {{ stock }} <StockStar :stockSymbol="stock" />
+            <li v-for="(stock, i) in usersStocks" :key="i">
+                <span @click="handleClick(stock)">{{ stock }}</span>
+                <StockStar :stockSymbol="stock" />
             </li>
+            <div class="instructions-text" v-if="usersStocks.length === 0">
+                <p>Thank you {{ userProfile.displayName }} for signing up!</p>
+                <br />
+                <p>
+                    Either select a stock from the stock list or look one up by
+                    name/symbol through the search bar.
+                </p>
+                <p>
+                    If you want to follow the stock and add it to your profile
+                    page, just click the white star in the upper left hand
+                    corner!
+                </p>
+            </div>
         </ul>
     </div>
 </template>
@@ -34,6 +44,10 @@ export default {
 </script>
 
 <style scoped>
+.profile {
+    text-align: center;
+}
+
 h1 {
     font-style: italic;
 }
@@ -43,6 +57,7 @@ ul {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    padding: 0;
 }
 
 li {
@@ -55,13 +70,26 @@ li {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    box-shadow: 8px 8px 10px rgba(92, 91, 91, 0.836);
 }
 
-li:hover {
-    background: rgb(35, 173, 35);
-    border: 1px solid white;
+.instructions-text {
+    margin: 0 5%;
+    font-weight: 600;
+    border: 1px solid black;
+    padding: 1% 5%;
+    background: #e7e7e7;
+    border-radius: 5%;
+    box-shadow: 8px 8px 10px rgba(92, 91, 91, 0.836);
+}
+
+span {
+    transition: all 0.2s ease-in-out;
+}
+
+span:hover {
+    color: rgb(35, 173, 35);
+    cursor: pointer;
     transform: scale(1.05);
 }
 </style>

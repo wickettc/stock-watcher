@@ -41,3 +41,13 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+svg {
+    cursor: pointer;
+}
+
+svg:hover {
+    transform: scale(1.1);
+}
+</style>
