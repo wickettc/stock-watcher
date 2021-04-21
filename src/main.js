@@ -7,7 +7,7 @@ import { auth } from './firebase/firebase';
 
 let app;
 
-auth.onAuthStateChanged(() => {
+auth.onAuthStateChanged((user) => {
     if (!app) {
         app = createApp(App)
             .use(store)
@@ -15,5 +15,7 @@ auth.onAuthStateChanged(() => {
             .use(VueApexCharts)
             .mount('#app');
     }
-    store.commit('setUserProfile', auth.currentUser);
+    if (user) {
+        store.dispatch('fetchUserProfile', auth.currentUser);
+    }
 });

@@ -23,11 +23,16 @@ export default createStore({
             state.userProfile = val;
         },
         syncUserStocks(state, stocks) {
-            // stocks needs to be array of stocks
+            // stocks needs to be an array
             state.usersStocks = stocks;
         },
         addStockToProfile(state, stock) {
             state.usersStocks.push(stock);
+        },
+        removeStockFromProfile(state, stock) {
+            state.usersStocks = state.usersStocks.filter(
+                (stocks) => stocks !== stock
+            );
         },
         setLoginError(state, error) {
             state.loginError = error;
@@ -64,12 +69,28 @@ export default createStore({
             });
             commit('addStockToProfile', stock);
         },
+        async removeStock({ commit }, stock) {
+            await fb.usersCollection
+                .doc(fb.auth.currentUser.uid)
+                .collection('stockCollection')
+                .doc(stock)
+                .delete();
+            commit('removeStockFromProfile', stock);
+        },
         async fetchUserProfile({ commit }, user) {
             const userProfile = await fb.usersCollection.doc(user.uid).get();
             commit('setUserProfile', userProfile.data());
-            // const usersStocks = await userProfile.collection('stockCollection').get().then((doc) => {
-            // ////////////////////////need to loop through stocks here to add to userStock state
-            // })
+            const usersStocks = [];
+            await fb.usersCollection
+                .doc(user.uid)
+                .collection('stockCollection')
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) =>
+                        usersStocks.push(doc.data().stock)
+                    );
+                });
+            commit('syncUserStocks', usersStocks);
             router.push('/profile');
         },
         async signup({ dispatch, commit }, form) {
