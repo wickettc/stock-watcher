@@ -54,7 +54,10 @@ export default createStore({
                     form.email,
                     form.password
                 );
-                dispatch('fetchUserProfile', user);
+                // payload.flag is to force redirect to /profile
+                // on login
+                const payload = { user, flag: true };
+                dispatch('fetchUserProfile', payload);
             } catch (err) {
                 commit('setLoginError', err);
             }
@@ -77,12 +80,14 @@ export default createStore({
                 .delete();
             commit('removeStockFromProfile', stock);
         },
-        async fetchUserProfile({ commit }, user) {
-            const userProfile = await fb.usersCollection.doc(user.uid).get();
+        async fetchUserProfile({ commit }, payload) {
+            const userProfile = await fb.usersCollection
+                .doc(payload.user.uid)
+                .get();
             commit('setUserProfile', userProfile.data());
             const usersStocks = [];
             await fb.usersCollection
-                .doc(user.uid)
+                .doc(payload.user.uid)
                 .collection('stockCollection')
                 .get()
                 .then((querySnapshot) => {
@@ -91,7 +96,9 @@ export default createStore({
                     );
                 });
             commit('syncUserStocks', usersStocks);
-            router.push('/profile');
+            if (payload.flag) {
+                router.push('/profile');
+            }
         },
         async signup({ dispatch, commit }, form) {
             try {
@@ -103,8 +110,10 @@ export default createStore({
                 userCol.set({
                     displayName: `${form.firstname} ${form.lastname}`,
                 });
-
-                dispatch('fetchUserProfile', user);
+                // payload.flag is to force redirect to /profile
+                // on signup
+                const payload = { user, flag: true };
+                dispatch('fetchUserProfile', payload);
             } catch (err) {
                 commit('setSignupError', err);
             }

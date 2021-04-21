@@ -15,7 +15,10 @@ auth.onAuthStateChanged((user) => {
             .use(VueApexCharts)
             .mount('#app');
     }
+    // payload for dispatch, flag is so router does not redirect
+    // to profile and instead stays on current page
+    const payload = { user: auth.currentUser, flag: false };
     if (user) {
-        store.dispatch('fetchUserProfile', auth.currentUser);
+        store.dispatch('fetchUserProfile', payload);
     }
 });
