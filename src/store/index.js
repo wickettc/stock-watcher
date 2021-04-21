@@ -120,7 +120,6 @@ export default createStore({
         },
         async logout({ commit }) {
             await fb.auth.signOut();
-
             commit('setUserProfile', {});
             router.push('/login');
         },
