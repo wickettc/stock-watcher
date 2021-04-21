@@ -56,7 +56,8 @@ export default {
                 (stock) => stock.name[0] === this.selectedLetter
             );
             res = _.uniqBy(res, 'name');
-            this.displayStockList = _.uniqBy(res, 'symbol');
+            res = _.uniqBy(res, 'symbol');
+            this.displayStockList = _.sortBy(res, 'name');
             this.loading = false;
         },
     },
