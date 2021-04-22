@@ -1,5 +1,10 @@
 <template>
-    <div class="dropdown">
+    <div
+        :class="[
+            'dropdown',
+            showLoggedIn ? 'loggedin-dropdown' : 'loggedout-dropdown',
+        ]"
+    >
         <ul>
             <li
                 @click="handleSelect(res)"
@@ -18,6 +23,7 @@ export default {
     name: 'SearchResults',
     props: {
         resultsData: Object,
+        showLoggedIn: Boolean,
     },
     data() {
         return {
@@ -73,9 +79,14 @@ li:hover {
 
 @media only screen and (max-width: 767px) {
     .dropdown {
-        top: 175px;
         width: 100%;
         left: 0;
+    }
+    .loggedin-dropdown {
+        top: 175px;
+    }
+    .loggedout-dropdown {
+        top: 143px;
     }
 }
 </style>

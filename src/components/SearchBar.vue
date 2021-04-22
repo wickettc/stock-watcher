@@ -6,6 +6,7 @@
             @close-search-dropdown="handleSelected"
             v-if="showSearchResults"
             :resultsData="searchResultsData"
+            :showLoggedIn="showLoggedIn"
         />
     </div>
 </template>
@@ -19,6 +20,9 @@ export default {
     name: 'SearchBar',
     components: {
         SearchResults,
+    },
+    props: {
+        showLoggedIn: Boolean,
     },
     created() {
         this.debouncedGetSymbol = _.debounce(this.getSymbol, 750);

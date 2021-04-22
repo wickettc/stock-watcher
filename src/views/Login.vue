@@ -279,4 +279,10 @@ form button:hover {
         width: 25%;
     }
 }
+
+@media only screen and (min-width: 767px) {
+    form button {
+        width: 100%;
+    }
+}
 </style>

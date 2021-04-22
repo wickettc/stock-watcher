@@ -1,7 +1,7 @@
 <template>
     <div id="nav">
         <div :class="['nav-content', openNavBar ? 'open-nav-content' : '']">
-            <SearchBar class="item-searchbar" />
+            <SearchBar :showLoggedIn="showLoggedIn" class="item-searchbar" />
             <router-link @click="closeNav" class="item-stocklist" to="/"
                 >Stock List</router-link
             >
