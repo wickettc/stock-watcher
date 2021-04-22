@@ -1,5 +1,6 @@
 <template>
     <div
+        v-click-outside="handleClickOutside"
         :class="[
             'dropdown',
             showLoggedIn ? 'loggedin-dropdown' : 'loggedout-dropdown',
@@ -31,6 +32,9 @@ export default {
         };
     },
     methods: {
+        handleClickOutside() {
+            this.$emit('close-search-dropdown', false);
+        },
         handleSelect(results) {
             this.selected = results;
             this.$emit('close-search-dropdown', this.selected);
@@ -75,6 +79,12 @@ li:last-child {
 
 li:hover {
     background: gray;
+}
+
+@media only screen and (min-width: 1000px) {
+    .dropdown {
+        width: 40%;
+    }
 }
 
 @media only screen and (max-width: 767px) {

@@ -250,7 +250,7 @@ form input {
 }
 
 form button {
-    margin-top: 5px;
+    margin-top: 10px;
     width: 30%;
     border: 1px solid black;
     background: white;
@@ -280,9 +280,9 @@ form button:hover {
     }
 }
 
-@media only screen and (min-width: 767px) {
+@media only screen and (max-width: 767px) {
     form button {
-        width: 100%;
+        width: 60%;
     }
 }
 </style>

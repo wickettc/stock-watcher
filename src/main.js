@@ -4,12 +4,14 @@ import router from './router';
 import store from './store';
 import VueApexCharts from 'vue3-apexcharts';
 import { auth } from './firebase/firebase';
+import ClickOutside from './utils/click-outside.js';
 
 let app;
 
 auth.onAuthStateChanged((user) => {
     if (!app) {
         app = createApp(App)
+            .directive('click-outside', ClickOutside)
             .use(store)
             .use(router)
             .use(VueApexCharts)

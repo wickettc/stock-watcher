@@ -38,20 +38,25 @@ export default {
         async getSymbol() {
             if (this.searchTerm.length > 0) {
                 let res = await callGetSymbol(this.searchTerm);
-                console.log(res);
                 this.searchResultsData = res;
                 this.showSearchResults = true;
             }
         },
         handleSelected(selected) {
-            this.showSearchResults = false;
-            this.searchTerm = '';
-            store.commit('closeNavBar');
-            store.commit('updateStockPage', selected);
-            this.$router.push({
-                name: 'Stock Page',
-                params: { symbol: selected.symbol },
-            });
+            if (!selected) {
+                this.showSearchResults = false;
+                this.searchTerm = '';
+                store.commit('closeNavBar');
+            } else {
+                this.showSearchResults = false;
+                this.searchTerm = '';
+                store.commit('closeNavBar');
+                store.commit('updateStockPage', selected);
+                this.$router.push({
+                    name: 'Stock Page',
+                    params: { symbol: selected.symbol },
+                });
+            }
         },
     },
     watch: {
