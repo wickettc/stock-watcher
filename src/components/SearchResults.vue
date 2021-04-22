@@ -55,8 +55,8 @@ export default {
     display: block;
     width: 60%;
     top: 46px;
-    position: absolute;
     z-index: 1000;
+    position: absolute;
 }
 
 ul {
@@ -93,10 +93,13 @@ li:hover {
         left: 0;
     }
     .loggedin-dropdown {
-        top: 175px;
+        top: 170px;
     }
     .loggedout-dropdown {
-        top: 143px;
+        top: 138px;
+    }
+    li {
+        font-size: 1.2rem;
     }
 }
 </style>
