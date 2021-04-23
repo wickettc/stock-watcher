@@ -1,9 +1,17 @@
 <template>
     <div class="header">
-        <StockStar v-if="isLoggedIn" :stockSymbol="stockQuote.symbol" />
-        <h2>{{ stockQuote.name }}</h2>
-        <IconUpDown :percent="parseFloat(stockQuote.percent_change)" />
-        <h4>{{ stockQuote.exchange }}</h4>
+        <div class="header-name">
+            <StockStar
+                class="stock-star"
+                v-if="isLoggedIn"
+                :stockSymbol="stockQuote.symbol"
+            />
+            <h2>{{ stockQuote.name }}</h2>
+        </div>
+        <div class="header-info">
+            <IconUpDown :percent="parseFloat(stockQuote.percent_change)" />
+            <h4>{{ stockQuote.exchange }}</h4>
+        </div>
     </div>
     <div class="body">
         <div>
@@ -95,13 +103,16 @@ export default {
     margin: 1% 0;
 }
 
-.header h2 {
-    width: 40%;
-    margin: 0;
+.stock-star {
+    margin-bottom: 5px;
 }
 
-.header h4 {
-    margin: 0;
+.header-name,
+.header-info {
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .display-today {
@@ -118,5 +129,26 @@ export default {
 
 .add-italics {
     font-style: italic;
+}
+
+@media only screen and (max-width: 767px) {
+    .header {
+        flex-direction: column;
+    }
+    .header-name,
+    .header-info {
+        width: 100%;
+    }
+
+    .header-name {
+        justify-content: center;
+    }
+    .header-name h2 {
+        margin-left: 10%;
+    }
+    .display-today,
+    .display-52 {
+        flex-direction: column;
+    }
 }
 </style>

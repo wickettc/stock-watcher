@@ -72,12 +72,7 @@ export default {
             const newDays = this.timeSeries.map((item) =>
                 item.datetime.slice(5)
             );
-            const findMin =
-                Math.min(...this.timeSeries.map((item) => item.low)) - 1;
-            const newMin = findMin <= 0 ? 0 : Math.floor(findMin);
-            const newMax = Math.floor(
-                Math.max(...this.timeSeries.map((item) => item.high)) + 1
-            );
+
             return {
                 chart: {
                     height: 350,
@@ -129,8 +124,6 @@ export default {
                     title: {
                         text: 'Prices in USD',
                     },
-                    min: newMin,
-                    max: newMax,
                 },
                 legend: {
                     position: 'top',
