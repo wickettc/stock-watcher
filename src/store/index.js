@@ -5,6 +5,7 @@ import * as fb from '../firebase/firebase';
 export default createStore({
     state: {
         stockPage: {},
+        searchTerm: '',
         allStocksAvailable: [],
         userProfile: {},
         usersStocks: [],
@@ -15,6 +16,9 @@ export default createStore({
     mutations: {
         updateStockPage(state, newStock) {
             state.stockPage = newStock;
+        },
+        updateSearchTerm(state, val) {
+            state.searchTerm = val;
         },
         getAllStocksAvailable(state, allStocks) {
             state.allStocksAvailable = allStocks;

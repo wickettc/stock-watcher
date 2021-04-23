@@ -270,6 +270,7 @@ form button:hover {
 }
 
 .loader {
+    margin-top: 5px;
     height: 25px;
     width: 25px;
 }

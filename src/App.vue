@@ -71,6 +71,9 @@ body {
 }
 
 @media only screen and (max-width: 767px) {
+    body {
+        min-height: 90vh;
+    }
     #app {
         margin-top: 55px;
     }

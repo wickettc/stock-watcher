@@ -1,7 +1,7 @@
 <template>
     <div v-click-outside="handleClickOutside" id="nav">
         <div :class="['nav-content', openNavBar ? 'open-nav-content' : '']">
-            <SearchBar :showLoggedIn="showLoggedIn" class="item-searchbar" />
+            <SearchBar class="item-searchbar" />
             <router-link @click="closeNav" class="item-stocklist" to="/"
                 >Stock List</router-link
             >
@@ -47,6 +47,11 @@ export default {
     components: {
         SearchBar,
     },
+    data() {
+        return {
+            clearSearch: false,
+        };
+    },
     methods: {
         logout() {
             this.$store.dispatch('logout');
@@ -58,6 +63,7 @@ export default {
             this.$store.commit('closeNavBar');
         },
         handleClickOutside() {
+            this.$store.commit('updateSearchTerm', '');
             if (this.openNavBar) {
                 this.closeNav();
             }

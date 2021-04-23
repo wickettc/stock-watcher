@@ -17,34 +17,21 @@
                 </div>
             </div>
         </div>
-        <!-- <SearchResults
-            @close-search-dropdown="handleSelected"
-            v-if="showSearchResults"
-            :resultsData="searchResultsData"
-            :showLoggedIn="showLoggedIn"
-        /> -->
     </div>
 </template>
 
 <script>
 import store from '../store';
-// import SearchResults from './SearchResults';
 import _ from 'lodash';
 import { callGetSymbol } from '../api/stockCalls';
 export default {
     name: 'SearchBar',
-    components: {
-        // SearchResults,
-    },
-    props: {
-        showLoggedIn: Boolean,
-    },
     created() {
-        this.debouncedGetSymbol = _.debounce(this.getSymbol, 750);
+        this.debouncedGetSymbol = _.debounce(this.getSymbol, 250);
     },
     data() {
         return {
-            searchTerm: '',
+            // searchTerm: '',
             searchResultsData: {},
             showSearchResults: false,
         };
@@ -60,23 +47,25 @@ export default {
             }
         },
         handleSelected(selected) {
-            if (!selected) {
-                this.showSearchResults = false;
-                this.searchTerm = '';
-                store.commit('closeNavBar');
-            } else {
-                this.showSearchResults = false;
-                this.searchTerm = '';
-                store.commit('closeNavBar');
-                store.commit('updateStockPage', selected);
-                this.$router.push({
-                    name: 'Stock Page',
-                    params: { symbol: selected.symbol },
-                });
-            }
+            this.showSearchResults = false;
+            this.searchTerm = '';
+            store.commit('closeNavBar');
+            store.commit('updateStockPage', selected);
+            this.$router.push({
+                name: 'Stock Page',
+                params: { symbol: selected.symbol },
+            });
         },
     },
     computed: {
+        searchTerm: {
+            get() {
+                return store.state.searchTerm;
+            },
+            set(val) {
+                store.commit('updateSearchTerm', val);
+            },
+        },
         usaResults() {
             return this.searchResultsData.data.data.filter(
                 (res) => res.exchange_timezone === 'America/New_York'
@@ -85,6 +74,9 @@ export default {
     },
     watch: {
         searchTerm: function() {
+            if (this.searchTerm === '') {
+                this.showSearchResults = false;
+            }
             this.debouncedGetSymbol();
         },
     },
@@ -114,7 +106,7 @@ input {
 .dropdown {
     border: 2px solid rgb(35, 173, 35);
     position: absolute;
-    max-height: 500px;
+    max-height: 200px;
     overflow-y: auto;
     width: 60%;
     z-index: 1000000;
@@ -127,6 +119,7 @@ input {
     padding: 5px 8px;
     cursor: pointer;
     background: lightgray;
+    color: black;
 }
 
 .display-item:last-child {
@@ -153,10 +146,7 @@ input {
         left: 0;
         transform: none;
         border: none;
-    }
-
-    .display-item:last-child {
-        border-bottom: 1px solid rgb(35, 173, 35);
+        border-bottom: 2px solid rgb(35, 173, 35);
     }
 
     .display-item {
