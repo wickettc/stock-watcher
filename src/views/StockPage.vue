@@ -69,10 +69,7 @@ export default {
             ];
         },
         timeLineChartOptions() {
-            const newDays = this.timeSeries.map((item) =>
-                item.datetime.slice(5)
-            );
-
+            const newDays = this.timeSeries.map((item) => item.datetime);
             return {
                 chart: {
                     height: 350,
@@ -115,6 +112,7 @@ export default {
                     size: 1,
                 },
                 xaxis: {
+                    type: 'datetime',
                     categories: newDays,
                     title: {
                         text: 'Date',
@@ -130,6 +128,7 @@ export default {
                     title: {
                         text: 'Prices in USD',
                     },
+                    showAlways: true,
                     forceNiceScale: true,
                     labels: {
                         style: { fontSize: '16px' },
@@ -148,15 +147,13 @@ export default {
                         options: {
                             yaxis: {
                                 labels: {
-                                    style: { fontSize: '12px' },
+                                    style: { fontSize: '13px' },
                                 },
                             },
                             xaxis: {
                                 labels: {
-                                    hideOverlappingLabels: true,
-                                    rotate: -30,
                                     style: {
-                                        fontSize: '12px',
+                                        fontSize: '13px',
                                     },
                                 },
                             },

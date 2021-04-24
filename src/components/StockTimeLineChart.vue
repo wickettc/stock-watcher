@@ -28,7 +28,8 @@ div {
 
 .chart {
     width: 90%;
-    height: 70%;
+    height: 100%;
+    margin-bottom: 5px;
 }
 
 @media only screen and (min-width: 1000px) {
