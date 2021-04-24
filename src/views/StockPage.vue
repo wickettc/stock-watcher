@@ -119,10 +119,20 @@ export default {
                     title: {
                         text: 'Date',
                     },
+                    labels: {
+                        hideOverlappingLabels: true,
+                        style: {
+                            fontSize: '16px',
+                        },
+                    },
                 },
                 yaxis: {
                     title: {
                         text: 'Prices in USD',
+                    },
+                    forceNiceScale: true,
+                    labels: {
+                        style: { fontSize: '16px' },
                     },
                 },
                 legend: {
@@ -132,6 +142,27 @@ export default {
                     offsetY: -25,
                     offsetX: -5,
                 },
+                responsive: [
+                    {
+                        breakpoint: '767',
+                        options: {
+                            yaxis: {
+                                labels: {
+                                    style: { fontSize: '12px' },
+                                },
+                            },
+                            xaxis: {
+                                labels: {
+                                    hideOverlappingLabels: true,
+                                    rotate: -30,
+                                    style: {
+                                        fontSize: '12px',
+                                    },
+                                },
+                            },
+                        },
+                    },
+                ],
             };
         },
     },

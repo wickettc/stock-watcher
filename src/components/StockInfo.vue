@@ -143,8 +143,8 @@ export default {
     .header-name {
         justify-content: center;
     }
-    .header-name h2 {
-        margin-left: 10%;
+    .stock-star {
+        margin-right: 10%;
     }
     .display-today,
     .display-52 {

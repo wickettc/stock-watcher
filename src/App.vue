@@ -33,6 +33,10 @@ body {
     color: #2c3e50;
 }
 
+input {
+    font-size: 16px;
+}
+
 .loader {
     display: inline-block;
     width: 150px;

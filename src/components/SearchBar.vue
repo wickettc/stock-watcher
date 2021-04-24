@@ -89,7 +89,7 @@ export default {
 }
 
 input {
-    padding: 10px 10px;
+    padding: 8px 10px;
     margin-left: 5px;
     text-align: center;
     background: #e7e7e7;
